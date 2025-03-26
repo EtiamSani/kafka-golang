@@ -56,7 +56,7 @@ Le worker est un service Go qui écoute le topic `coffee_orders` et traite les c
 
 ### Prérequis
 
-- Docker et Docker Compose
+- Docker
 - Go (version 1.16 ou supérieure)
 
 ### Démarrer le système
@@ -64,7 +64,8 @@ Le worker est un service Go qui écoute le topic `coffee_orders` et traite les c
 Pour lancer l'ensemble du système, utilisez Docker Compose :
 
 ```bash
-docker-compose up -d
+docker pull apache/kafka:3.7.0
+docker run -p 9092:9092 apache/kafka:3.7.0
 ```
 
 Cela démarrera trois conteneurs :
@@ -88,13 +89,6 @@ curl -X POST http://localhost:3000/order \
   -d '{"customer_name":"Jean Dupont","coffee_type":"Espresso"}'
 ```
 
-### Suivre le traitement des commandes
-
-Les logs du worker affichent le traitement des commandes :
-
-```bash
-docker-compose logs -f worker
-```
 
 ## Architecture Détaillée
 
